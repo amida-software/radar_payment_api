@@ -1,0 +1,33 @@
+{
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/amida-software/radar_payment_api.git"
+    }
+  ],
+  "name": "amida-software/radar_payment_api",
+  "version": "1.0.0",
+  "description": "RADAR Payments API",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "require": {
+    "guzzlehttp/guzzle": "*",
+    "php": "^7.2"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Amida\\Radar\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Amida\\Radar\\Tests\\": "tests/"
+    }
+  },
+  "scripts": {
+    "phpunit": "\"vendor/bin/phpunit\""
+  }
+}
