@@ -70,6 +70,24 @@ class Service
         return new GetOrderStatusResponse($httpResponse);
     }
 
+    public function checkCallbackSymmetric(array $input, string $key): bool
+    {
+        return $input['checksum'] === hash_hmac('sha256', $this->getCallbackInputString($input), $key);
+    }
+
+    public function checkCallbackAsymmetric(array $input, string $publicKey): bool
+    {
+        $isVerify = openssl_verify($this->getCallbackInputString($input), hex2bin(strtolower($input['checksum'])), $publicKey, OPENSSL_ALGO_SHA512);
+
+        if ($isVerify == 1) {
+            return true;
+        } elseif ($isVerify == 0) {
+            return false;
+        } else {
+            throw new \Exception(openssl_error_string());
+        }
+    }
+
     public function getClient(): ClientInterface
     {
         return $this->client;
@@ -147,5 +165,19 @@ class Service
         }
 
         return $data;
+    }
+
+    public function getCallbackInputString(array $input): string
+    {
+        unset($input['checksum']);
+        $input = ksort($input);
+
+        $string = '';
+
+        foreach ($input as $key => $value) {
+            $string .= $key.';'.$value.';';
+        }
+
+        return $string;
     }
 }
