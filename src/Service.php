@@ -10,6 +10,8 @@ use Amida\Radar\Request\RegisterPreAuthOrderDataSet as RegisterOrderPreAuthReque
 use Amida\Radar\Response\RegisterPreAuthOrderDataSet as RegisterPreAuthOrderOrderResponse;
 use Amida\Radar\Request\DepositOrderDataSet as DepositOrderRequest;
 use Amida\Radar\Response\DepositOrderDataSet as DepositOrderResponse;
+use Amida\Radar\Request\RefundOrderDataSet as RefundOrderRequest;
+use Amida\Radar\Response\RefundOrderDataSet as RefundOrderResponse;
 use GuzzleHttp\ClientInterface;
 
 class Service
@@ -30,22 +32,31 @@ class Service
         return new RegisterOrderOrderResponse($httpResponse);
     }
 
-    public function registerPreAuthOrder(RegisterOrderPreAuthRequest $registerOrderDataSet): RegisterPreAuthOrderOrderResponse
+    public function registerPreAuthOrder(RegisterOrderPreAuthRequest $registerPreAuthOrderDataSet): RegisterPreAuthOrderOrderResponse
     {
         $httpResponse = $this->client->request('post', $this->getUrl().'/registerPreAuth.do', [
-            'query' => array_merge($this->getAuthArray(), $registerOrderDataSet->toArray()),
+            'query' => array_merge($this->getAuthArray(), $registerPreAuthOrderDataSet->toArray()),
         ]);
 
         return new RegisterPreAuthOrderOrderResponse($httpResponse);
     }
 
-    public function depositOrder(DepositOrderRequest $registerOrderDataSet): DepositOrderResponse
+    public function depositOrder(DepositOrderRequest $depositOrderDataSet): DepositOrderResponse
     {
         $httpResponse = $this->client->request('post', $this->getUrl().'/deposit.do', [
-            'query' => array_merge($this->getAuthArray(), $registerOrderDataSet->toArray()),
+            'query' => array_merge($this->getAuthArray(), $depositOrderDataSet->toArray()),
         ]);
 
         return new DepositOrderResponse($httpResponse);
+    }
+
+    public function refundOrder(RefundOrderRequest $refundOrderDataSet): RefundOrderResponse
+    {
+        $httpResponse = $this->client->request('post', $this->getUrl().'/refund.do', [
+            'query' => array_merge($this->getAuthArray(), $refundOrderDataSet->toArray()),
+        ]);
+
+        return new RefundOrderResponse($httpResponse);
     }
 
     public function getClient(): ClientInterface

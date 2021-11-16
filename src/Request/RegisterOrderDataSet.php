@@ -57,7 +57,7 @@ class RegisterOrderDataSet extends RequestDataSet
 
     public function setLanguage(string $value): RegisterOrderDataSet
     {
-        $this->attributes['description'] = $value;
+        $this->attributes['language'] = $value;
 
         return $this;
     }

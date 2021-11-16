@@ -57,7 +57,7 @@ class RegisterPreAuthOrderDataSet extends RequestDataSet
 
     public function setLanguage(string $value): RegisterPreAuthOrderDataSet
     {
-        $this->attributes['description'] = $value;
+        $this->attributes['language'] = $value;
 
         return $this;
     }

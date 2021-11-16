@@ -49,6 +49,18 @@ class APITest extends TestCase
         $this->assertIsString($response->getErrorMessage());
     }
 
+    public function testRefundOrder(): void
+    {
+        $data = new Radar\Request\RefundOrderDataSet();
+        $data->setOrderId('test')->setAmount(100);
+
+        $response = self::$service->refundOrder($data);
+
+        $this->assertInstanceOf(Radar\Response\RefundOrderDataSet::class, $response);
+        $this->assertIsInt($response->getErrorCode());
+        $this->assertIsString($response->getErrorMessage());
+    }
+
     public static function setUpBeforeClass(): void
     {
         self::$service = self::createService();
