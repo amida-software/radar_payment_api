@@ -6,6 +6,10 @@ namespace Amida\Radar;
 
 use Amida\Radar\Request\RegisterOrderDataSet as RegisterOrderRequest;
 use Amida\Radar\Response\RegisterOrderDataSet as RegisterOrderOrderResponse;
+use Amida\Radar\Request\RegisterPreAuthOrderDataSet as RegisterOrderPreAuthRequest;
+use Amida\Radar\Response\RegisterPreAuthOrderDataSet as RegisterPreAuthOrderOrderResponse;
+use Amida\Radar\Request\DepositOrderDataSet as DepositOrderRequest;
+use Amida\Radar\Response\DepositOrderDataSet as DepositOrderResponse;
 use GuzzleHttp\ClientInterface;
 
 class Service
@@ -24,6 +28,24 @@ class Service
         ]);
 
         return new RegisterOrderOrderResponse($httpResponse);
+    }
+
+    public function registerPreAuthOrder(RegisterOrderPreAuthRequest $registerOrderDataSet): RegisterPreAuthOrderOrderResponse
+    {
+        $httpResponse = $this->client->request('post', $this->getUrl().'/registerPreAuth.do', [
+            'query' => array_merge($this->getAuthArray(), $registerOrderDataSet->toArray()),
+        ]);
+
+        return new RegisterPreAuthOrderOrderResponse($httpResponse);
+    }
+
+    public function depositOrder(DepositOrderRequest $registerOrderDataSet): DepositOrderResponse
+    {
+        $httpResponse = $this->client->request('post', $this->getUrl().'/deposit.do', [
+            'query' => array_merge($this->getAuthArray(), $registerOrderDataSet->toArray()),
+        ]);
+
+        return new DepositOrderResponse($httpResponse);
     }
 
     public function getClient(): ClientInterface
