@@ -17,6 +17,7 @@ class APITest extends TestCase
 
         $this->assertInstanceOf(Radar\Response\RegisterOrderDataSet::class, $response);
         $this->assertIsInt($response->getErrorCode());
+        $this->assertEquals(0, $response->getErrorCode());
         $this->assertIsString($response->getErrorMessage());
         $this->assertIsString($response->getFormUrl());
         $this->assertIsString($response->getOrderId());
@@ -32,6 +33,7 @@ class APITest extends TestCase
 
         $this->assertInstanceOf(Radar\Response\RegisterPreAuthOrderDataSet::class, $response);
         $this->assertIsInt($response->getErrorCode());
+        $this->assertEquals(0, $response->getErrorCode());
         $this->assertIsString($response->getErrorMessage());
         $this->assertIsString($response->getFormUrl());
         $this->assertIsString($response->getOrderId());
@@ -46,6 +48,7 @@ class APITest extends TestCase
 
         $this->assertInstanceOf(Radar\Response\DepositOrderDataSet::class, $response);
         $this->assertIsInt($response->getErrorCode());
+        $this->assertEquals(0, $response->getErrorCode());
         $this->assertIsString($response->getErrorMessage());
     }
 
@@ -58,6 +61,20 @@ class APITest extends TestCase
 
         $this->assertInstanceOf(Radar\Response\RefundOrderDataSet::class, $response);
         $this->assertIsInt($response->getErrorCode());
+        $this->assertEquals(0, $response->getErrorCode());
+        $this->assertIsString($response->getErrorMessage());
+    }
+
+    public function testGetOrderStatus(): void
+    {
+        $data = new Radar\Request\GetOrderStatusDataSet();
+        $data->setOrderId('test');
+
+        $response = self::$service->getOrderStatus($data);
+
+        $this->assertInstanceOf(Radar\Response\GetOrderStatusDataSet::class, $response);
+        $this->assertIsInt($response->getErrorCode());
+        $this->assertEquals(0, $response->getErrorCode());
         $this->assertIsString($response->getErrorMessage());
     }
 

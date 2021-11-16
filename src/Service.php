@@ -12,6 +12,8 @@ use Amida\Radar\Request\DepositOrderDataSet as DepositOrderRequest;
 use Amida\Radar\Response\DepositOrderDataSet as DepositOrderResponse;
 use Amida\Radar\Request\RefundOrderDataSet as RefundOrderRequest;
 use Amida\Radar\Response\RefundOrderDataSet as RefundOrderResponse;
+use Amida\Radar\Request\GetOrderStatusDataSet as GetOrderStatusRequest;
+use Amida\Radar\Response\GetOrderStatusDataSet as GetOrderStatusResponse;
 use GuzzleHttp\ClientInterface;
 
 class Service
@@ -57,6 +59,15 @@ class Service
         ]);
 
         return new RefundOrderResponse($httpResponse);
+    }
+
+    public function getOrderStatus(GetOrderStatusRequest $getOrderStatusDataSet): GetOrderStatusResponse
+    {
+        $httpResponse = $this->client->request('post', $this->getUrl().'/refund.do', [
+            'query' => array_merge($this->getAuthArray(), $getOrderStatusDataSet->toArray()),
+        ]);
+
+        return new GetOrderStatusResponse($httpResponse);
     }
 
     public function getClient(): ClientInterface
