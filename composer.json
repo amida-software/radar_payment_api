@@ -14,7 +14,8 @@
     "guzzlehttp/guzzle": "*",
     "php": "^7.2",
     "ext-json": "*",
-    "ext-openssl": "*"
+    "ext-openssl": "*",
+    "myclabs/php-enum": "^1.8"
   },
   "require-dev": {
     "phpunit/phpunit": "*"

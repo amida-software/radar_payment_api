@@ -1,6 +1,7 @@
 <?php
 
 use Amida\Radar;
+use Amida\Radar\Request\Feature;
 use PHPUnit\Framework\TestCase;
 
 class APITest extends TestCase
@@ -10,6 +11,8 @@ class APITest extends TestCase
     public function testRegisterOrder(): void
     {
         $response = $this->registerOrder(1);
+
+        echo $response->getErrorMessage();
 
         $this->assertInstanceOf(Radar\Response\RegisterOrderDataSet::class, $response);
         $this->assertEquals(0 ,$response->getErrorCode());
@@ -96,6 +99,7 @@ class APITest extends TestCase
         $data = new Radar\Request\RegisterOrderDataSet;
         $data->setAmount(100)->setOrderNumber($id)
             ->setReturnUrl('https://radardoc.io')->setJsonParams(['test' => 'value'])
+            ->addFeature(Feature::AUTO_PAYMENT())
             ->setBillingPayerData((new Radar\Request\BillingPayerData)->setBillingAddressLine1('test'));
 
         return self::$service->registerOrder($data);

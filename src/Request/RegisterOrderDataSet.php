@@ -111,7 +111,47 @@ class RegisterOrderDataSet extends RequestDataSet
         return $this;
     }
 
-    public function setFeatures(?string $value): RegisterOrderDataSet
+    public function addFeature(Feature $value): RegisterOrderDataSet
+    {
+        if (!isset($this->attributes['features'])) {
+            $features = [];
+        } else {
+            $features = explode(',', $this->attributes['features']);
+        }
+
+        $features[] = $value;
+
+        $this->attributes['features'] = implode(',', array_unique($features));
+
+        return $this;
+    }
+
+    public function removeFeature(Feature $value): RegisterOrderDataSet
+    {
+        if (!isset($this->attributes['features'])) {
+            return $this;
+        } else {
+            $features = explode(',', $this->attributes['features']);
+        }
+
+        $removeIndex = null;
+        foreach ($features as $index => $feature) {
+            if ($feature == $value) {
+                $removeIndex = $index;
+            }
+        }
+
+        if ($removeIndex) {
+            unset($features[$removeIndex]);
+            $features = array_values($features);
+        }
+
+        $this->attributes['features'] = implode(',', array_unique($features));
+
+        return $this;
+    }
+
+    public function setFeatures(Feature $value): RegisterOrderDataSet
     {
         $this->attributes['features'] = $value;
 
