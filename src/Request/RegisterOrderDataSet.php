@@ -6,7 +6,7 @@ namespace Amida\Radar\Request;
 
 class RegisterOrderDataSet extends RequestDataSet
 {
-    public function setOrderNumber(string $value): RegisterOrderDataSet
+    public function setOrderNumber(?string $value): RegisterOrderDataSet
     {
         $this->attributes['orderNumber'] = $value;
 
@@ -147,13 +147,6 @@ class RegisterOrderDataSet extends RequestDataSet
         }
 
         $this->attributes['features'] = implode(',', array_unique($features));
-
-        return $this;
-    }
-
-    public function setFeatures(Feature $value): RegisterOrderDataSet
-    {
-        $this->attributes['features'] = $value;
 
         return $this;
     }

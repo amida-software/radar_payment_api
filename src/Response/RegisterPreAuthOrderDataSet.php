@@ -4,15 +4,7 @@
 namespace Amida\Radar\Response;
 
 
-class RegisterPreAuthOrderDataSet extends BasicResponseDataSet
+class RegisterPreAuthOrderDataSet extends RegisterOrderDataSet
 {
-    public function getFormUrl(): string
-    {
-        return $this->getData()->formUrl;
-    }
 
-    public function getOrderId(): string
-    {
-        return $this->getData()->orderId;
-    }
 }

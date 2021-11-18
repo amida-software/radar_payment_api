@@ -6,12 +6,12 @@ namespace Amida\Radar\Response;
 
 class GetOrderStatusDataSet extends BasicResponseDataSet
 {
-    public function getOrderNumber(): string
+    public function getOrderNumber(): ?string
     {
         return $this->getData()->orderNumber;
     }
 
-    public function getOrderStatus(): int
+    public function getOrderStatus(): ?int
     {
         return $this->getData()->orderStatus;
     }
@@ -31,7 +31,7 @@ class GetOrderStatusDataSet extends BasicResponseDataSet
         return $this->getData()->amount;
     }
 
-    public function getCurrency(): int
+    public function getCurrency(): ?int
     {
         return $this->getData()->currency;
     }
@@ -39,6 +39,11 @@ class GetOrderStatusDataSet extends BasicResponseDataSet
     public function getDate(): string
     {
         return $this->getData()->date;
+    }
+
+    public function getOrderDescription(): ?string
+    {
+        return $this->getData()->orderDescription;
     }
 
     public function getIp(): string
@@ -51,7 +56,7 @@ class GetOrderStatusDataSet extends BasicResponseDataSet
         return $this->getData()->paymentWay;
     }
 
-    public function getAvsCode(): string
+    public function getAvsCode(): ?string
     {
         return $this->getData()->avsCode;
     }
