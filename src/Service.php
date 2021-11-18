@@ -63,7 +63,7 @@ class Service
 
     public function getOrderStatus(GetOrderStatusRequest $getOrderStatusDataSet): GetOrderStatusResponse
     {
-        $httpResponse = $this->client->request('post', $this->getUrl().'/refund.do', [
+        $httpResponse = $this->client->request('post', $this->getUrl().'/getOrderStatusExtended.do', [
             'query' => array_merge($this->getAuthArray(), $getOrderStatusDataSet->toArray()),
         ]);
 

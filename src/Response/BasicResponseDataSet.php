@@ -30,11 +30,11 @@ class BasicResponseDataSet
 
     public function getErrorCode(): int
     {
-        return $this->data->errorCode;
+        return (int) $this->data->errorCode;
     }
 
     public function getErrorMessage(): string
     {
-        return $this->data->errorMessage;
+        return (string) $this->data->errorMessage;
     }
 }
