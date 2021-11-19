@@ -72,7 +72,7 @@ class Service
 
     public function checkCallbackSymmetric(array $input, string $key): bool
     {
-        return $input['checksum'] === hash_hmac('sha256', $this->getCallbackInputString($input), $key);
+        return $input['checksum'] === strtoupper(hash_hmac('sha256', $this->getCallbackInputString($input), $key));
     }
 
     public function checkCallbackAsymmetric(array $input, string $publicKey): bool
@@ -170,7 +170,7 @@ class Service
     public function getCallbackInputString(array $input): string
     {
         unset($input['checksum']);
-        $input = ksort($input);
+        ksort($input);
 
         $string = '';
 

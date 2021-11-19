@@ -82,6 +82,32 @@ class APITest extends TestCase
         //$this->assertIsString($response->getPaymentWay());
     }
 
+    public function testCheckCallbackSymmetric(): void
+    {
+        parse_str('mdOrder=3ff6962a-7dcc-4283-ab50-a6d7dd3386fe&orderNumber=10747&checksum=14E0D9722D43BE67BFF111F53570BB5BCCFEED8AD15D72A48D51D4E949DAF988&operation=deposited&status=1$amount=123456', $data);
+
+        $this->assertEquals(true, self::$service->checkCallbackSymmetric($data, 'test'));
+    }
+
+    public function testCheckCallbackAsymmetric(): void
+    {
+        $publicKey = <<<EOD
+-----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwtuGKbQ4WmfdV1gjWWys
+5jyHKTWXnxX3zVa5/Cx5aKwJpOsjrXnHh6l8bOPQ6Sgj3iSeKJ9plZ3i7rPjkfmw
+qUOJ1eLU5NvGkVjOgyi11aUKgEKwS5Iq5HZvXmPLzu+U22EUCTQwjBqnE/Wf0hnI
+wYABDgc0fJeJJAHYHMBcJXTuxF8DmDf4DpbLrQ2bpGaCPKcX+04POS4zVLVCHF6N
+6gYtM7U2QXYcTMTGsAvmIqSj1vddGwvNGeeUVoPbo6enMBbvZgjN5p6j3ItTziMb
+Vba3m/u7bU1dOG2/79UpGAGR10qEFHiOqS6WpO7CuIR2tL9EznXRc7D9JZKwGfoY
+/QIDAQAB
+-----END PUBLIC KEY-----
+EOD;
+
+        parse_str('mdOrder=12b59da8-f68f-7c8d-12b5-9da8000826ea&checksum=9524FD765FB1BABFB1F42E4BC6EF5A4B07BAA3F9C809098ACBB462618A9327539F975FEDB4CF6EC1556FF88BA74774342AF4F5B51BA63903BE9647C670EBD962467282955BD1D57B16935C956864526810870CD32967845EBABE1C6565C03F94FF66907CEDB54669A1C74AC1AD6E39B67FA7EF6D305A007A474F03B80FD6C965656BEAA74E09BB1189F4B32E622C903DC52843C454B7ACF76D6F76324C27767DE2FF6E7217716C19C530CA7551DB58268CC815638C30F3BCA3270E1FD44F63C14974B108E65C20638ECE2F2D752F32742FFC5077415102706FA5235D310D4948A780B08D1B75C8983F22F211DFCBF14435F262ADDA6A97BFEB6D332C3D51010B&operation=deposited&status=1&amount=35000099', $data);
+
+        $this->assertEquals(true, self::$service->checkCallbackAsymmetric($data, $publicKey));
+    }
+
     public static function setUpBeforeClass(): void
     {
         self::$service = self::createService();
