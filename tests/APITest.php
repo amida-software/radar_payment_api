@@ -116,12 +116,11 @@ EOD;
     private static function createService(): Radar\Service
     {
         $service = new Radar\Service;
-        $service->setClient(new \GuzzleHttp\Client());
-        $service->setUserName('radar_payment_api');
-        $service->setPassword('gvxnyE}5');
-        $service->setUrl('https://sandbox.paydoc.io/payment/rest');
 
-        return $service;
+        return $service->setClient(new \GuzzleHttp\Client())
+            ->setUserName('radar_payment_api')
+            ->setPassword('gvxnyE}5')
+            ->setUrl('https://sandbox.paydoc.io/payment/rest');
     }
 
     private static function registerOrder($id): Radar\Response\RegisterOrderDataSet
