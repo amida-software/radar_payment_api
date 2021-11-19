@@ -13,7 +13,7 @@ class APITest extends TestCase
         $response = $this->registerOrder(1);
 
         $this->assertInstanceOf(Radar\Response\RegisterOrderDataSet::class, $response);
-        $this->assertEquals(0 ,$response->getErrorCode());
+        $this->assertEquals(0, $response->getErrorCode());
         $this->assertIsString($response->getErrorMessage());
         $this->assertIsString($response->getFormUrl());
         $this->assertIsString($response->getOrderId());
@@ -28,7 +28,7 @@ class APITest extends TestCase
         $response = self::$service->registerPreAuthOrder($data);
 
         $this->assertInstanceOf(Radar\Response\RegisterPreAuthOrderDataSet::class, $response);
-        $this->assertEquals(0 ,$response->getErrorCode());
+        $this->assertEquals(0, $response->getErrorCode());
         $this->assertIsString($response->getErrorMessage());
         $this->assertIsString($response->getFormUrl());
         $this->assertIsString($response->getOrderId());
@@ -44,7 +44,7 @@ class APITest extends TestCase
         $response = self::$service->depositOrder($data);
 
         $this->assertInstanceOf(Radar\Response\DepositOrderDataSet::class, $response);
-        $this->assertEquals(0 ,$response->getErrorCode());
+        $this->assertEquals(7, $response->getErrorCode());
         $this->assertIsString($response->getErrorMessage());
     }
 
@@ -58,7 +58,7 @@ class APITest extends TestCase
         $response = self::$service->refundOrder($data);
 
         $this->assertInstanceOf(Radar\Response\RefundOrderDataSet::class, $response);
-        $this->assertEquals(0 ,$response->getErrorCode());
+        $this->assertEquals(7, $response->getErrorCode());
         $this->assertIsString($response->getErrorMessage());
     }
 
@@ -72,8 +72,14 @@ class APITest extends TestCase
         $response = self::$service->getOrderStatus($data);
 
         $this->assertInstanceOf(Radar\Response\GetOrderStatusDataSet::class, $response);
-        $this->assertEquals(0 ,$response->getErrorCode());
+        $this->assertEquals(0, $response->getErrorCode());
         $this->assertIsString($response->getErrorMessage());
+        $this->assertIsInt($response->getActionCode());
+        $this->assertIsString($response->getActionCodeDescription());
+        $this->assertIsInt($response->getAmount());
+        $this->assertIsString($response->getDate());
+        //$this->assertIsString($response->getIp());
+        //$this->assertIsString($response->getPaymentWay());
     }
 
     public static function setUpBeforeClass(): void
