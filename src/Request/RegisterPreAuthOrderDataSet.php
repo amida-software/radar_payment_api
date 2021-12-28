@@ -165,7 +165,7 @@ class RegisterPreAuthOrderDataSet extends RequestDataSet
         return $this;
     }
 
-    public function setEmail(?int $value): RegisterPreAuthOrderDataSet
+    public function setEmail(?string $value): RegisterPreAuthOrderDataSet
     {
         $this->attributes['email'] = $value;
 
