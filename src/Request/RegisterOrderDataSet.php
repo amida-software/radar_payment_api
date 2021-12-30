@@ -158,7 +158,7 @@ class RegisterOrderDataSet extends RequestDataSet
         return $this;
     }
 
-    public function setEmail(?int $value): RegisterOrderDataSet
+    public function setEmail(?string $value): RegisterOrderDataSet
     {
         $this->attributes['email'] = $value;
 

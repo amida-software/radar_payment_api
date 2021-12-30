@@ -12,6 +12,7 @@
   "license": "proprietary",
   "require": {
     "guzzlehttp/guzzle": "*",
+    "monolog/monolog": "*",
     "php": "^7.2",
     "ext-json": "*",
     "ext-openssl": "*",
