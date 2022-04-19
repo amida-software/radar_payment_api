@@ -6,7 +6,7 @@
     }
   ],
   "name": "amida-software/radar_payment_api",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "RADAR Payments API",
   "minimum-stability": "stable",
   "license": "proprietary",
